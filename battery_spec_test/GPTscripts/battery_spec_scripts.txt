@@ -1,0 +1,34 @@
+Using the following code as an example for refactoring:
+CodeBlock/*
+type Data = (DateTime<Utc>, f32, f32, f32, bool);
+
+pub fn write_to_csv(data: Vec<Data>, file_path: &str) -> Result<(), Box<dyn Error>> {
+    let mut wtr = Writer::from_path(file_path)?;
+
+    // Write the header
+    wtr.write_record(&["DateTime", "Storage", "Input Power", "Output Power","Negative Net Storage"])?;
+
+    // Write the data
+    for (datetime, storage, input_power, output_power, dummy) in data {
+        wtr.write_record(&[
+            datetime.to_rfc3339(),
+            storage.to_string(),
+            input_power.to_string(),
+            output_power.to_string(),
+            dummy.to_string(),
+        ])?;
+    }
+    // Flush the writer to ensure all data is written
+    wtr.flush()?;
+    Ok(())
+}
+*/
+create the following list of functions in rust: 
+
+[pub fn create stat_csv(){},pub fn append_to_stat_csv(){}]
+
+Context: These functions are for the purpose of creating and updating a csv with the following columns [Chargers Count, Energy System Size,battery Size, Duration Energy % needed by grid] where the first column is a counting number and all other columns are floating points
+
+
+
+remove the battery specificatin to the main file
